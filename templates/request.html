@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="../static/request.css">
+<link rel="stylesheet" href="/static/loader.css">
+{{super ()}}
+{% endblock %}
+
+{% block title %}Hompage{% endblock %}
+{% block content %}
+<div class="container mt-2">
+    <h1 class="display-5">Enter Your Potential Address</h1>
+    <div>
+    <form action="/request" id="request-form" method="POST">
+        {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+      
+        {% for field in form
+               if field.widget.input_type != 'hidden' %}
+      
+          <div class="form-group">
+            {{ field.label }}
+            {{ field(class='form-control') }}
+      
+            {% for error in field.errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+      
+        {% endfor %}
+      
+        <button type="submit" class="btn btn-success" id='submit'>Submit</button>
+      </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+{{super()}}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+<script src="/static/loader.js"></script>
+<script src="/static/request.js"></script>
+{% endblock %}

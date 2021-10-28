@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="../static/home.css">
+{{super ()}}
+{% endblock %}
+
+{% block title %}Hompage{% endblock %}
+{% block content %}
+<div class="container mt-2">
+    <h1 class="display-5">Register!</h1>
+
+    <div>
+    <form action="/signup" id="register-form" method="POST">
+        {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+      
+        {% for field in form
+               if field.widget.input_type != 'hidden' %}
+      
+          <div class="form-group">
+            {{ field.label }}
+            {{ field(class='form-control') }}
+      
+            {% for error in field.errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+      
+        {% endfor %}
+      
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+</div>
+<script src="../static/register.js"></script>
+{% endblock %}

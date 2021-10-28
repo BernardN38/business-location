@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/competition.css">
+{{super ()}}
+{% endblock %}
+
+{% block title %}Competition Data{% endblock%}
+
+{% block content %}
+<h2 class="display-5 text-center">Competition Data</h2>
+<div class="container px-3">
+    <div class="row gx-3">
+        {% for place in places %}
+    <div class="card col-4" style="width: 18rem;">
+        <img src="/static/images/restaurant.svg" class="card-img-top" alt="...">
+        <div class="card-body p-0">
+            <h5 class="card-title">{{place.name}}</h5>
+            <p class="card-text">Price Level: {{place.price_level}} out of 4.0</p>
+            <p class="card-text rating">Overall Rating: {{place.overall_rating}}</p>
+            <p class="card-text ratings-count">Ratings Count: {{place.ratings_count}}</p>
+            <div class="types">
+                <h5>Associated types</h5>
+            {% for type in place.types %}
+            <p>{{type.name}}</p>
+            {% endfor %}
+            </div>  
+            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      </div>
+      </div>
+    {% endfor %}
+
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+{{super()}}
+<script src="/static/competition.js"></script>
+{% endblock %}

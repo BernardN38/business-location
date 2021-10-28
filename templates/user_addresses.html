@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}User Addresses{% endblock %}
+
+{% block content %}
+
+        <div class="container">
+            <h2 class="display-4">My Addresses</h2>
+            <ul class="list-group">
+            {% for address in addresses%}
+            <li class="list-group-item"><a href="/request/{{address.id}}">{{address.street}}, {{address.city}}, {{address.state}}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+{% endblock %}

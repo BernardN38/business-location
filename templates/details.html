@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="/static/details.css">
+<link rel="stylesheet" href="/static/loader.css">
+{{super ()}}
+{% endblock %}
+{% block title %}Details{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card mt-2">
+        <div class="card-header">
+          Potential Analysis: {{address.street}}
+          <p hidden id="address-id">{{address.id}}</p> 
+          <p hidden id="state">{{address.state}}</p> 
+        </div>
+        <div class="card-body">
+            <h2 class="card-title">{{location}}</h2>
+            <p class="card-text">County: {{county}}</p>
+            <p class="card-text">Population: {{ "{:,.0f}".format(population) }}</p>
+            <p class="card-text">Type: Restaurant</p> 
+            <label for="sub_type">Sub-Type:</label>
+            <input type="text" class="form-control" id="sub_type"  placeholder="Choose a type">
+            <small id="emailHelp" class="form-text text-muted">Ex. Fast food, Chinese, Mexican, Pizza</small>
+            <button class="btn btn-success" id="submit">Submit</button>
+            <a href="/more-info/{{address.id}}" class="btn btn-primary">More Information</a>
+        </div>
+      </div>
+
+    <div class="border mt-1 container" id='chart-div'>
+      <h2 class="text-center">Overall Rating: <span id='overall-rating'></span></h2>
+        <canvas class="chart" id='mychart' height="300" width="200"></canvas>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{super()}}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+<script src="/static/loader.js"></script>
+<script src="/static/details.js"></script>
+{% endblock %}
